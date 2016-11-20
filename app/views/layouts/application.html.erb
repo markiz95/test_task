@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MongoUpload</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' %>
+    <%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div style="padding:20px 0 0 10px">
+      <% if user_signed_in? %>
+          Welcome <%=  current_user.email %>
+          <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+      <% else %>
+          <%= link_to "Sign in", new_user_session_path%> or <%= link_to "Sign up", new_user_registration_path %>
+      <% end %>
+    </div>
+    <div class = "container">
+      <%= yield %>
+    </div>
+
+  </body>
+</html>

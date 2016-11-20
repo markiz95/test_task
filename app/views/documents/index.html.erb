@@ -1,0 +1,42 @@
+<% if !flash[:notice].blank? %>
+    <div class = "alert alert-info">
+      <%= flash[:notice] %>
+    </div>
+<% end %>
+
+<table class = "table table-striped">
+  <thead>
+  <tr>
+    <th style="width:33%">file_id</th>
+    <th>url</th>
+    <th> </th>
+  </tr>
+  </thead>
+
+  <tbody>
+    <% if @documents.size == 0 %>
+        <tr>
+          <td colspan="6">No documents found.</td>
+        </tr>
+    <% else %>
+      <% @documents.each do |document| %>
+        <tr>
+          <td><%= document.id %></td>
+          <td><%= link_to "download", document.url.url %></td>
+          <td><%= button_to "delete", document, method: :delete, class: "btn btn-xs btn-danger" %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="well">
+  <%= form_for @document, html: { multipart: true } do |f| %>
+    <div class="form-group">
+      <%= f.label :url, "Select a file to upload" %>
+      <%= f.file_field :url %>
+    </div>
+    <%= f.submit "Upload", class: "btn btn-primary" %>
+  <% end %>
+</div>
+
